@@ -120,8 +120,8 @@ public class Punto {
         }
         return max;
     }
-    
-        public static double minX(Punto[] p) {
+
+    public static double minX(Punto[] p) {
         double min = p[0].x;
         for (int i = 0; i < p.length; i++) {
             if (min > p[i].x) {

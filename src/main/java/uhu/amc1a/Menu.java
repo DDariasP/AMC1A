@@ -237,11 +237,12 @@ public class Menu extends javax.swing.JFrame {
             f.setTitle("Resultados - " + fileName);
             f.setVisible(true);
             //mostrar nube
-            Nube example = new Nube("Scatter Chart Example");
-            example.setSize(800, 400);
-            example.setLocationRelativeTo(null);
-            example.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            example.setVisible(true);
+            Nube nube = new Nube(array, b.min);
+            nube.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            nube.setSize(800, 400);
+            nube.setLocationRelativeTo(null);
+            nube.setTitle("Representación - " + fileName);
+            nube.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }

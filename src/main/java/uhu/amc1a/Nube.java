@@ -1,74 +1,88 @@
 package uhu.amc1a;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.NumberAxis;
+import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYItemRenderer;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 public class Nube extends JFrame {
 
-    private static final long serialVersionUID = 6294689542092367723L;
+    private final Punto[] p;
+    private final Distancia[] d;
 
-    public Nube(String title) {
-        super(title);
+    public Nube(Punto[] array, Distancia[] dmin) {
+        p = array;
+        d = dmin;
+        // Create a single plot containing both the scatter and line
+        XYPlot plot = new XYPlot();
+        // Create the scatter data, renderer, and axis
+        XYDataset setNube = createNube();
+        XYItemRenderer renderer1 = new XYLineAndShapeRenderer(false, true);	// Shapes only
+        renderer1.setSeriesShape(0, new Ellipse2D.Double(-3.0, 0.0, 3.0, 3.0));
+        renderer1.setSeriesPaint(0, Color.MAGENTA);
 
-        // Create dataset  
-        XYDataset dataset = createDataset();
-
-        // Create chart  
-        JFreeChart chart = ChartFactory.createScatterPlot(
-                "Boys VS Girls weight comparison chart",
-                "X-Axis", "Y-Axis", dataset);
-
-        //Changes background color  
-        XYPlot plot = (XYPlot) chart.getPlot();
-        plot.setBackgroundPaint(new Color(255, 228, 196));
+        ValueAxis domain1 = new NumberAxis("");
+        ValueAxis range1 = new NumberAxis("");
+        // Set the scatter data, renderer, and axis into plot
+        plot.setDataset(0, setNube);
+        plot.setRenderer(0, renderer1);
+        plot.setDomainAxis(0, domain1);
+        plot.setRangeAxis(0, range1);
+        // Map the scatter to the first Domain and first Range
+        plot.mapDatasetToDomainAxis(0, 0);
+        plot.mapDatasetToRangeAxis(0, 0);
+        // Create the line data, renderer, and axis
+        XYDataset setDist0 = createDist(3);
+        XYItemRenderer renderer2 = new XYLineAndShapeRenderer(true, true);
+        renderer2.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
+        renderer2.setSeriesPaint(0, Color.CYAN);
+        renderer2.setSeriesStroke(0, new BasicStroke(2.0f));
+        // Set the line data, renderer, and axis into plot
+        plot.setDataset(1, setDist0);
+        plot.setRenderer(1, renderer2);
+        // Create the chart with the plot and a legend
+        JFreeChart chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+        plot.setBackgroundPaint(Color.darkGray);
 
         // Create Panel  
         ChartPanel panel = new ChartPanel(chart);
+        panel.setDomainZoomable(true);
+        panel.setRangeZoomable(true);
+
         setContentPane(panel);
     }
 
-    private XYDataset createDataset() {
+    private XYDataset createNube() {
         XYSeriesCollection dataset = new XYSeriesCollection();
-
-        //Boys (Age,weight) series  
-        XYSeries series1 = new XYSeries("Boys");
-        series1.add(1, 72.9);
-        series1.add(2, 81.6);
-        series1.add(3, 88.9);
-        series1.add(4, 96);
-        series1.add(5, 102.1);
-        series1.add(6, 108.5);
-        series1.add(7, 113.9);
-        series1.add(8, 119.3);
-        series1.add(9, 123.8);
-        series1.add(10, 124.4);
-
+        //ciudades 
+        XYSeries series1 = new XYSeries("Ciudades");
+        for (int i = 0; i < p.length; i++) {
+            series1.add(p[i].x, p[i].y);
+        }
         dataset.addSeries(series1);
+        return dataset;
+    }
 
-        //Girls (Age,weight) series  
-        XYSeries series2 = new XYSeries("Girls");
-        series2.add(1, 72.5);
-        series2.add(2, 80.1);
-        series2.add(3, 87.2);
-        series2.add(4, 94.5);
-        series2.add(5, 101.4);
-        series2.add(6, 107.4);
-        series2.add(7, 112.8);
-        series2.add(8, 118.2);
-        series2.add(9, 122.9);
-        series2.add(10, 123.4);
-
+    private XYDataset createDist(int tipo) {
+        XYSeriesCollection dataset = new XYSeriesCollection();
+        //distancia minima
+        XYSeries series2 = new XYSeries("Distancia Minima");
+        series2.add(d[tipo].p1.x, d[tipo].p1.y);
+        series2.add(d[tipo].p2.x, d[tipo].p2.y);
         dataset.addSeries(series2);
-
         return dataset;
     }
 }
