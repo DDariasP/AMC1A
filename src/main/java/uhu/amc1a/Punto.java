@@ -111,36 +111,6 @@ public class Punto {
         return min;
     }
 
-    public static double maxY(Punto[] p) {
-        double max = p[0].y;
-        for (int i = 0; i < p.length; i++) {
-            if (max < p[i].y) {
-                max = p[i].y;
-            }
-        }
-        return max;
-    }
-
-    public static double minX(Punto[] p) {
-        double min = p[0].x;
-        for (int i = 0; i < p.length; i++) {
-            if (min > p[i].x) {
-                min = p[i].x;
-            }
-        }
-        return min;
-    }
-
-    public static double maxX(Punto[] p) {
-        double max = p[0].x;
-        for (int i = 0; i < p.length; i++) {
-            if (max < p[i].x) {
-                max = p[i].x;
-            }
-        }
-        return max;
-    }
-
     @Override
     public String toString() {
         DecimalFormat p = new DecimalFormat("#.00");

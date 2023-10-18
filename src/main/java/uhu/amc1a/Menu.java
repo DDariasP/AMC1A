@@ -244,19 +244,94 @@ public class Menu extends javax.swing.JFrame {
             nube.setTitle("Representación - " + fileName);
             nube.setVisible(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            
+            System.out.println(e.getMessage());
+//JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonOpcion3ActionPerformed
 
     private void botonOpcion4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcion4ActionPerformed
         try {
-            //abrir frame Opcion4
-            Opcion4 f = new Opcion4();
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            //definir tallas y num de iteraciones
+            int T[] = {200, 500, 1500, 3250, 5000};
+            int N = 10;
+            Busqueda b[][] = new Busqueda[T.length][N];
+            //crear arrays
+            for (int i = 0; i < T.length; i++) {
+                for (int j = 0; j < N; j++) {
+                    Punto tmp[] = new Punto[T[i]];
+                    Punto.rellenar(tmp, T[i], Menu.peor);
+                    b[i][j] = new Busqueda(tmp);
+                }
+            }
+            //hacer busquedas
+            for (int i = 0; i < T.length; i++) {
+                for (int j = 0; j < N; j++) {
+                    b[i][j].exhaustiva();
+                    b[i][j].poda();
+                    b[i][j].dyv();
+                    b[i][j].dyvplus();
+                }
+            }
+            //calcular medias
+            double[][] tablaT = new double[T.length][Busqueda.NUM];
+            for (int i = 0; i < T.length; i++) {
+                for (int j = 0; j < Busqueda.NUM; j++) {
+                    tablaT[i][j] = 0.0;
+                }
+            }
+            for (int i = 0; i < T.length; i++) {
+                for (int j = 0; j < N; j++) {
+                    tablaT[i][0] = tablaT[i][0] + b[i][j].t[0];
+                    tablaT[i][1] = tablaT[i][1] + b[i][j].t[1];
+                    tablaT[i][2] = tablaT[i][2] + b[i][j].t[2];
+                    tablaT[i][3] = tablaT[i][3] + b[i][j].t[3];
+                }
+            }
+            //definir formato de salida
+            DecimalFormat tp = new DecimalFormat("0.0000");
+            double nanoMedia = 1000000.0 * (double) (N);
+            //rellenar tabla
+            String[] atributos = {"Talla",
+                "Exhaustiva",
+                "Poda",
+                "DyV",
+                "DyVPlus"};
+            Object[][] datos = {
+                {" ", "Tiempo(ms)", "Tiempo(ms)", "Tiempo(ms)", "Tiempo(ms)"},
+                {T[0], tp.format(tablaT[0][0] / nanoMedia), tp.format(tablaT[0][1] / nanoMedia), tp.format(tablaT[0][2] / nanoMedia), tp.format(tablaT[0][3] / nanoMedia)},
+                {T[1], tp.format(tablaT[1][0] / nanoMedia), tp.format(tablaT[1][1] / nanoMedia), tp.format(tablaT[1][2] / nanoMedia), tp.format(tablaT[1][3] / nanoMedia)},
+                {T[2], tp.format(tablaT[2][0] / nanoMedia), tp.format(tablaT[2][1] / nanoMedia), tp.format(tablaT[2][2] / nanoMedia), tp.format(tablaT[2][3] / nanoMedia)},
+                {T[3], tp.format(tablaT[3][0] / nanoMedia), tp.format(tablaT[3][1] / nanoMedia), tp.format(tablaT[3][2] / nanoMedia), tp.format(tablaT[3][3] / nanoMedia)},
+                {T[4], tp.format(tablaT[4][0] / nanoMedia), tp.format(tablaT[4][1] / nanoMedia), tp.format(tablaT[4][2] / nanoMedia), tp.format(tablaT[4][3] / nanoMedia)}
+            };
+            Double[][] valores = {
+                {0.0, 0.0, 0.0, 0.0, 0.0},
+                {0.0, (tablaT[0][0] / nanoMedia), (tablaT[0][1] / nanoMedia), (tablaT[0][2] / nanoMedia), (tablaT[0][3] / nanoMedia)},
+                {1.0, (tablaT[1][0] / nanoMedia), (tablaT[1][1] / nanoMedia), (tablaT[1][2] / nanoMedia), (tablaT[1][3] / nanoMedia)},
+                {2.0, (tablaT[2][0] / nanoMedia), (tablaT[2][1] / nanoMedia), (tablaT[2][2] / nanoMedia), (tablaT[2][3] / nanoMedia)},
+                {3.0, (tablaT[3][0] / nanoMedia), (tablaT[3][1] / nanoMedia), (tablaT[3][2] / nanoMedia), (tablaT[3][3] / nanoMedia)},
+                {4.0, (tablaT[4][0] / nanoMedia), (tablaT[4][1] / nanoMedia), (tablaT[4][2] / nanoMedia), (tablaT[4][3] / nanoMedia)}
+            };
+            //mostrar tabla
+            JTable t = new JTable(datos, atributos);
+            JScrollPane sp = new JScrollPane(t);
+            JFrame f = new JFrame();
+            f.add(sp);
             f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            f.setBounds(700, 200, 330, 150);
-            f.setTitle("Iniciar búsquedas");
+            f.setBounds(700, 200, 1100, 120);
+            f.setTitle("Resultados - " + fileName);
             f.setVisible(true);
+            //mostrar nube
+            Grafica nube = new Grafica(valores);
+            nube.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            nube.setSize(800, 400);
+            nube.setLocationRelativeTo(null);
+            nube.setTitle("Representación - " + fileName);
+            nube.setVisible(true);
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonOpcion4ActionPerformed
 

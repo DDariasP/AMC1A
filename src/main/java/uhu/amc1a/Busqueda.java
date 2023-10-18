@@ -30,8 +30,7 @@ public class Busqueda {
     public Distancia exhaustiva() {
         double t1 = System.nanoTime();
         Punto p[] = array.get(EXH);
-        Distancia dmin = new Distancia(p[0], p[1]);
-        numcal[EXH]++;
+        Distancia dmin = new Distancia(Double.MAX_VALUE, p[0], p[0]);
         for (int i = 0; i < p.length; i++) {
             for (int j = i + 1; j < p.length; j++) {
                 Distancia d = new Distancia(p[i], p[j]);
@@ -48,8 +47,7 @@ public class Busqueda {
     }
 
     private Distancia exhaustivaDYV(Punto p[], int a, int b) {
-        Distancia dmin = new Distancia(p[a], p[a + 1]);
-        numcal[DYV]++;
+        Distancia dmin = new Distancia(Double.MAX_VALUE, p[a], p[a]);
         for (int i = a; i <= b; i++) {
             for (int j = i + 1; j <= b; j++) {
                 Distancia d = new Distancia(p[i], p[j]);
@@ -63,7 +61,7 @@ public class Busqueda {
     }
 
     private Distancia exhaustivaDYVP(Punto p[], int a, int b) {
-        Distancia dmin = new Distancia(p[a], p[a + 1]);
+        Distancia dmin = new Distancia(Double.MAX_VALUE, p[a], p[a]);
         numcal[DYVP]++;
         for (int i = a; i <= b; i++) {
             for (int j = i + 1; j <= b; j++) {
@@ -78,8 +76,7 @@ public class Busqueda {
     }
 
     private Distancia exhaustiva12(Punto[] p) {
-        Distancia dmin = new Distancia(p[0], p[1]);
-        numcal[DYVP]++;
+        Distancia dmin = new Distancia(Double.MAX_VALUE, p[0], p[0]);
         for (int i = 0; i < p.length; i++) {
             for (int j = i + 1; j < p.length && j < i + 12; j++) {
                 Distancia d = new Distancia(p[i], p[j]);
@@ -96,8 +93,7 @@ public class Busqueda {
         double t1 = System.nanoTime();
         Punto p[] = array.get(PODA);
         Punto.quicksort(p, 'x');
-        Distancia dmin = new Distancia(p[0], p[1]);
-        numcal[PODA]++;
+        Distancia dmin = new Distancia(Double.MAX_VALUE, p[0], p[0]);
         for (int i = 1; i < p.length; i++) {
             int j = i + 1;
             while ((j < p.length) && (p[j].x - p[i].x < dmin.valor)) {
@@ -214,11 +210,6 @@ public class Busqueda {
             Distancia dmin = exhaustivaDYVP(p, i, d);
             return dmin;
         }
-    }
-
-    @Override
-    public String toString() {
-        return ("n" + String.valueOf(array.get(0).length));
     }
 
 }
