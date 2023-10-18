@@ -18,57 +18,83 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 public class Grafica extends JFrame {
 
-    private final Double[][] v;
+    private final Double[][] d;
 
-    public Grafica(Double[][] valores) {
-        v = valores;
-        // Create a single plot containing both the scatter and line
+    public Grafica(Double[][] datos) {
+        d = datos;
+
+        //crear la grafica
         XYPlot plot = new XYPlot();
-        // Create the scatter data, renderer, and axis
-        XYDataset setNube = createDist(2);
-        XYItemRenderer renderer1 = new XYLineAndShapeRenderer(false, true);	// Shapes only
-        renderer1.setSeriesShape(0, new Ellipse2D.Double(-3.0, 0.0, 3.0, 3.0));
-        renderer1.setSeriesPaint(0, Color.MAGENTA);
 
-        ValueAxis domain1 = new NumberAxis("");
-        ValueAxis range1 = new NumberAxis("");
-        // Set the scatter data, renderer, and axis into plot
-        plot.setDataset(0, setNube);
-        plot.setRenderer(0, renderer1);
-        plot.setDomainAxis(0, domain1);
-        plot.setRangeAxis(0, range1);
-        // Map the scatter to the first Domain and first Range
-        plot.mapDatasetToDomainAxis(0, 0);
-        plot.mapDatasetToRangeAxis(0, 0);
-        // Create the line data, renderer, and axis
-        XYDataset setDist0 = createDist(3);
+        //crear dmin0
+        XYDataset setDist0 = createDist(0, "Exh");
+        //caracteristicas de dmin0
+        XYItemRenderer renderer0 = new XYLineAndShapeRenderer(true, true);
+        renderer0.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
+        renderer0.setSeriesPaint(0, Color.CYAN);
+        renderer0.setSeriesStroke(0, new BasicStroke(2.0f));
+        //añadir dmin0 a la grafica
+        plot.setDataset(0, setDist0);
+        plot.setRenderer(0, renderer0);
+
+        //crear dmin1
+        XYDataset setDist1 = createDist(1, "Poda");
+        //caracteristicas de dmin1
+        XYItemRenderer renderer1 = new XYLineAndShapeRenderer(true, true);
+        renderer1.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
+        renderer1.setSeriesPaint(0, Color.ORANGE);
+        renderer1.setSeriesStroke(0, new BasicStroke(2.0f));
+        //añadir dmin1 a la grafica
+        plot.setDataset(1, setDist1);
+        plot.setRenderer(1, renderer1);
+
+        //crear dmin2
+        XYDataset setDist2 = createDist(2, "DyV");
+        //caracteristicas de dmin2
         XYItemRenderer renderer2 = new XYLineAndShapeRenderer(true, true);
         renderer2.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
-        renderer2.setSeriesPaint(0, Color.CYAN);
+        renderer2.setSeriesPaint(0, Color.GREEN);
         renderer2.setSeriesStroke(0, new BasicStroke(2.0f));
-        // Set the line data, renderer, and axis into plot
-        plot.setDataset(1, setDist0);
-        plot.setRenderer(1, renderer2);
-        // Create the chart with the plot and a legend
-        JFreeChart chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
-        plot.setBackgroundPaint(Color.darkGray);
+        //añadir dmin2 a la grafica
+        plot.setDataset(2, setDist2);
+        plot.setRenderer(2, renderer2);
 
-        // Create Panel  
+        //crear dmin3
+        XYDataset setDist3 = createDist(3, "DyVP");
+        //caracteristicas de dmin3
+        XYItemRenderer renderer3 = new XYLineAndShapeRenderer(true, true);
+        renderer3.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
+        renderer3.setSeriesPaint(0, Color.YELLOW);
+        renderer3.setSeriesStroke(0, new BasicStroke(2.0f));
+        //añadir dmin3 a la grafica
+        plot.setDataset(3, setDist3);
+        plot.setRenderer(3, renderer3);
+
+        //crear y añadir los ejes
+        ValueAxis domain = new NumberAxis("Talla");
+        ValueAxis range = new NumberAxis("Tiempo(ms)");
+        plot.setDomainAxis(0, domain);
+        plot.setRangeAxis(0, range);
+
+        //crear el area de trazado
+        JFreeChart chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);
+        plot.setBackgroundPaint(Color.DARK_GRAY);
+
+        //crear la ventana 
         ChartPanel panel = new ChartPanel(chart);
         panel.setDomainZoomable(true);
         panel.setRangeZoomable(true);
-
         setContentPane(panel);
     }
 
-    private XYDataset createDist(int tipo) {
+    private XYDataset createDist(int tipo, String nombre) {
         XYSeriesCollection dataset = new XYSeriesCollection();
-        //ciudades 
-        XYSeries series1 = new XYSeries("Ciudades");
+        //distancia minima
+        XYSeries series = new XYSeries(nombre);
         for (int i = 0; i < 5; i++) {
-            series1.add(v[tipo][i], v[i][tipo]);
+            series.add(d[i][0], d[i][tipo + 1]);
         }
-        dataset.addSeries(series1);
+        dataset.addSeries(series);
         return dataset;
     }
 }

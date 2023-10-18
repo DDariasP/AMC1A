@@ -236,7 +236,7 @@ public class Menu extends javax.swing.JFrame {
             f.setBounds(700, 200, 1100, 120);
             f.setTitle("Resultados - " + fileName);
             f.setVisible(true);
-            //mostrar nube
+            //mostrar g
             Nube nube = new Nube(array, b.min);
             nube.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             nube.setSize(800, 400);
@@ -255,6 +255,7 @@ public class Menu extends javax.swing.JFrame {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             //definir tallas y num de iteraciones
             int T[] = {200, 500, 1500, 3250, 5000};
+            double TD[] = {200.0, 500.0, 1500.0, 3250.0, 5000.0};
             int N = 10;
             Busqueda b[][] = new Busqueda[T.length][N];
             //crear arrays
@@ -307,12 +308,11 @@ public class Menu extends javax.swing.JFrame {
                 {T[4], tp.format(tablaT[4][0] / nanoMedia), tp.format(tablaT[4][1] / nanoMedia), tp.format(tablaT[4][2] / nanoMedia), tp.format(tablaT[4][3] / nanoMedia)}
             };
             Double[][] valores = {
-                {0.0, 0.0, 0.0, 0.0, 0.0},
-                {0.0, (tablaT[0][0] / nanoMedia), (tablaT[0][1] / nanoMedia), (tablaT[0][2] / nanoMedia), (tablaT[0][3] / nanoMedia)},
-                {1.0, (tablaT[1][0] / nanoMedia), (tablaT[1][1] / nanoMedia), (tablaT[1][2] / nanoMedia), (tablaT[1][3] / nanoMedia)},
-                {2.0, (tablaT[2][0] / nanoMedia), (tablaT[2][1] / nanoMedia), (tablaT[2][2] / nanoMedia), (tablaT[2][3] / nanoMedia)},
-                {3.0, (tablaT[3][0] / nanoMedia), (tablaT[3][1] / nanoMedia), (tablaT[3][2] / nanoMedia), (tablaT[3][3] / nanoMedia)},
-                {4.0, (tablaT[4][0] / nanoMedia), (tablaT[4][1] / nanoMedia), (tablaT[4][2] / nanoMedia), (tablaT[4][3] / nanoMedia)}
+                {TD[0], (tablaT[0][0] / nanoMedia), (tablaT[0][1] / nanoMedia), (tablaT[0][2] / nanoMedia), (tablaT[0][3] / nanoMedia)},
+                {TD[1], (tablaT[1][0] / nanoMedia), (tablaT[1][1] / nanoMedia), (tablaT[1][2] / nanoMedia), (tablaT[1][3] / nanoMedia)},
+                {TD[2], (tablaT[2][0] / nanoMedia), (tablaT[2][1] / nanoMedia), (tablaT[2][2] / nanoMedia), (tablaT[2][3] / nanoMedia)},
+                {TD[3], (tablaT[3][0] / nanoMedia), (tablaT[3][1] / nanoMedia), (tablaT[3][2] / nanoMedia), (tablaT[3][3] / nanoMedia)},
+                {TD[4], (tablaT[4][0] / nanoMedia), (tablaT[4][1] / nanoMedia), (tablaT[4][2] / nanoMedia), (tablaT[4][3] / nanoMedia)}
             };
             //mostrar tabla
             JTable t = new JTable(datos, atributos);
@@ -320,16 +320,15 @@ public class Menu extends javax.swing.JFrame {
             JFrame f = new JFrame();
             f.add(sp);
             f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            f.setBounds(700, 200, 1100, 120);
-            f.setTitle("Resultados - " + fileName);
+            f.setBounds(700, 200, 800, 150);
+            f.setTitle("Resultados");
             f.setVisible(true);
-            //mostrar nube
-            Grafica nube = new Grafica(valores);
-            nube.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            nube.setSize(800, 400);
-            nube.setLocationRelativeTo(null);
-            nube.setTitle("Representación - " + fileName);
-            nube.setVisible(true);
+            //mostrar g
+            Grafica g = new Grafica(valores);
+            g.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            g.setBounds(200, 350, 800, 400);
+            g.setTitle("Representación");
+            g.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
