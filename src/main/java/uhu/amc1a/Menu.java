@@ -3,8 +3,6 @@ package uhu.amc1a;
 import java.awt.Cursor;
 import java.io.File;
 import java.text.DecimalFormat;
-import java.util.HashSet;
-import java.util.Set;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -45,6 +43,7 @@ public class Menu extends javax.swing.JFrame {
         labelTitulo = new javax.swing.JLabel();
         labelSubtitulo = new javax.swing.JLabel();
         labelArchivo = new javax.swing.JLabel();
+        botonOpcionE = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +55,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         botonOpcion1.setText("1) Crear un fichero .tsp aleatorio");
+        botonOpcion1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonOpcion1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonOpcion1ActionPerformed(evt);
@@ -63,13 +63,15 @@ public class Menu extends javax.swing.JFrame {
         });
 
         botonOpcion2.setText("2) Cargar un dataset en memoria");
+        botonOpcion2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonOpcion2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonOpcion2ActionPerformed(evt);
             }
         });
 
-        botonOpcion3.setText("3) Comprobar las estrategias");
+        botonOpcion3.setText("3) Testear todas las estrategias");
+        botonOpcion3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonOpcion3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonOpcion3ActionPerformed(evt);
@@ -77,6 +79,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         botonOpcion4.setText("4) Comparar todas las estrategias");
+        botonOpcion4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonOpcion4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonOpcion4ActionPerformed(evt);
@@ -84,6 +87,7 @@ public class Menu extends javax.swing.JFrame {
         });
 
         botonOpcion5.setText("5) Comparar dos estrategias");
+        botonOpcion5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         botonOpcion5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonOpcion5ActionPerformed(evt);
@@ -98,6 +102,14 @@ public class Menu extends javax.swing.JFrame {
 
         labelArchivo.setText("Array cargado:");
 
+        botonOpcionE.setText("E) Testear una estrategia");
+        botonOpcionE.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        botonOpcionE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonOpcionEActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,24 +119,19 @@ public class Menu extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labelArchivo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(checkCasoPeor, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labelTitulo)
+                            .addComponent(labelSubtitulo)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(botonOpcion5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonOpcion1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(botonOpcion2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(botonOpcion3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(botonOpcion4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(botonOpcion5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonOpcion4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                                .addComponent(botonOpcionE, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonOpcion1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(checkCasoPeor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 30, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labelSubtitulo)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(labelTitulo)
-                        .addGap(20, 20, 20)))
-                .addContainerGap(64, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,12 +149,14 @@ public class Menu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(botonOpcion3)
                 .addGap(18, 18, 18)
+                .addComponent(botonOpcionE)
+                .addGap(18, 18, 18)
                 .addComponent(botonOpcion4)
                 .addGap(18, 18, 18)
                 .addComponent(botonOpcion5)
-                .addGap(45, 45, 45)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(checkCasoPeor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -200,6 +209,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void botonOpcion3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcion3ActionPerformed
         try {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             //hacer busquedas y crear archivos
             Busqueda b = new Busqueda(array);
             b.exhaustiva();
@@ -239,14 +249,13 @@ public class Menu extends javax.swing.JFrame {
             //mostrar g
             Nube nube = new Nube(array, b.min);
             nube.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            nube.setSize(800, 400);
+            nube.setSize(800, 800);
             nube.setLocationRelativeTo(null);
             nube.setTitle("Representación - " + fileName);
             nube.setVisible(true);
         } catch (Exception e) {
-            
-            System.out.println(e.getMessage());
-//JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+            JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonOpcion3ActionPerformed
 
@@ -307,7 +316,7 @@ public class Menu extends javax.swing.JFrame {
                 {T[3], tp.format(tablaT[3][0] / nanoMedia), tp.format(tablaT[3][1] / nanoMedia), tp.format(tablaT[3][2] / nanoMedia), tp.format(tablaT[3][3] / nanoMedia)},
                 {T[4], tp.format(tablaT[4][0] / nanoMedia), tp.format(tablaT[4][1] / nanoMedia), tp.format(tablaT[4][2] / nanoMedia), tp.format(tablaT[4][3] / nanoMedia)}
             };
-            Double[][] valores = {
+            double[][] valores = {
                 {TD[0], (tablaT[0][0] / nanoMedia), (tablaT[0][1] / nanoMedia), (tablaT[0][2] / nanoMedia), (tablaT[0][3] / nanoMedia)},
                 {TD[1], (tablaT[1][0] / nanoMedia), (tablaT[1][1] / nanoMedia), (tablaT[1][2] / nanoMedia), (tablaT[1][3] / nanoMedia)},
                 {TD[2], (tablaT[2][0] / nanoMedia), (tablaT[2][1] / nanoMedia), (tablaT[2][2] / nanoMedia), (tablaT[2][3] / nanoMedia)},
@@ -324,12 +333,20 @@ public class Menu extends javax.swing.JFrame {
             f.setTitle("Resultados");
             f.setVisible(true);
             //mostrar g
-            Grafica g = new Grafica(valores);
+            Grafica4 g = new Grafica4(valores);
             g.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             g.setBounds(200, 350, 800, 400);
             g.setTitle("Representación");
             g.setVisible(true);
+            //mostrar g2
+            GraficaExh g2 = new GraficaExh(valores);
+            g2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            g2.setBounds(1000, 350, 800, 400);
+            g2.setTitle("Representación");
+            g2.setVisible(true);
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_botonOpcion4ActionPerformed
@@ -346,10 +363,21 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonOpcion5ActionPerformed
 
+    private void botonOpcionEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcionEActionPerformed
+        try {
+            //abrir frame OpcionE
+            OpcionE f = new OpcionE();
+            f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            f.setBounds(700, 200, 225, 250);
+            f.setTitle("Elegir un algoritmo");
+            f.setVisible(true);
+        } catch (Exception e) {
+        }    }//GEN-LAST:event_botonOpcionEActionPerformed
+
     public static void main(String args[]) {
         Menu m = new Menu();
         m.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        m.setBounds(200, 200, 375, 475);
+        m.setBounds(200, 200, 370, 500);
         m.setTitle("AMC - Práctica 1a");
         m.setVisible(true);
     }
@@ -360,6 +388,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton botonOpcion3;
     private javax.swing.JButton botonOpcion4;
     private javax.swing.JButton botonOpcion5;
+    private javax.swing.JButton botonOpcionE;
     private javax.swing.JCheckBox checkCasoPeor;
     private javax.swing.JLabel labelArchivo;
     private javax.swing.JLabel labelSubtitulo;

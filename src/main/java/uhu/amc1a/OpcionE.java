@@ -14,23 +14,18 @@ import javax.swing.JTable;
  *
  * @author diego
  */
-public class Opcion5 extends javax.swing.JFrame {
+public class OpcionE extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public Opcion5() {
+    public OpcionE() {
         initComponents();
         grupo1.add(b00);
         grupo1.add(b01);
         grupo1.add(b02);
         grupo1.add(b03);
-        grupo2.add(b10);
-        grupo2.add(b11);
-        grupo2.add(b12);
-        grupo2.add(b13);
         b00.setSelected(true);
-        b10.setSelected(true);
     }
 
     /**
@@ -48,12 +43,7 @@ public class Opcion5 extends javax.swing.JFrame {
         b00 = new javax.swing.JRadioButton();
         bok = new javax.swing.JButton();
         lab1 = new javax.swing.JLabel();
-        lab2 = new javax.swing.JLabel();
         b03 = new javax.swing.JRadioButton();
-        b10 = new javax.swing.JRadioButton();
-        b11 = new javax.swing.JRadioButton();
-        b12 = new javax.swing.JRadioButton();
-        b13 = new javax.swing.JRadioButton();
         b02 = new javax.swing.JRadioButton();
         bcancel = new javax.swing.JButton();
 
@@ -70,19 +60,14 @@ public class Opcion5 extends javax.swing.JFrame {
             }
         });
 
-        lab1.setText("Algoritmo 1:");
-
-        lab2.setText("Algoritmo 2:");
+        lab1.setText("Algoritmo:");
 
         b03.setText("DyVPlus");
-
-        b10.setText("Exhaustivo");
-
-        b11.setText("Poda");
-
-        b12.setText("DyV");
-
-        b13.setText("DyVPlus");
+        b03.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                b03ActionPerformed(evt);
+            }
+        });
 
         b02.setText("DyV");
 
@@ -98,61 +83,42 @@ public class Opcion5 extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lab1)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(b00)
-                            .addComponent(b01)
                             .addComponent(b03)
                             .addComponent(b02)
-                            .addComponent(bok, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(51, 51, 51)
+                            .addComponent(b01)
+                            .addComponent(b00))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lab1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(b10)
-                                    .addComponent(b11)
-                                    .addComponent(b12)
-                                    .addComponent(lab2))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(b13)
-                                    .addComponent(bcancel))
-                                .addContainerGap(58, Short.MAX_VALUE))))))
+                                .addComponent(bok, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(bcancel)))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lab1)
-                    .addComponent(lab2))
+                .addComponent(lab1)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b00)
-                    .addComponent(b10))
+                .addComponent(b00)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b01)
-                    .addComponent(b11))
+                .addComponent(b01)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b12)
-                    .addComponent(b02))
+                .addComponent(b02)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(b03)
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(b03)
-                    .addComponent(b13))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bok)
-                    .addComponent(bcancel))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(bcancel)
+                    .addComponent(bok))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,7 +129,6 @@ public class Opcion5 extends javax.swing.JFrame {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             //comprobar input
             int a1 = -1;
-            int a2 = -1;
             if (b00.isSelected()) {
                 a1 = 0;
             }
@@ -176,21 +141,8 @@ public class Opcion5 extends javax.swing.JFrame {
             if (b03.isSelected()) {
                 a1 = 3;
             }
-            if (b10.isSelected()) {
-                a2 = 0;
-            }
-            if (b11.isSelected()) {
-                a2 = 1;
-            }
-            if (b12.isSelected()) {
-                a2 = 2;
-            }
-            if (b13.isSelected()) {
-                a2 = 3;
-            }
             //guardar eleccion
             String n1 = "";
-            String n2 = "";
             switch (a1) {
                 case 0:
                     n1 = "Exhaustiva";
@@ -203,20 +155,6 @@ public class Opcion5 extends javax.swing.JFrame {
                     break;
                 case 3:
                     n1 = "DyVPlus";
-                    break;
-            }
-            switch (a2) {
-                case 0:
-                    n2 = "Exhaustiva";
-                    break;
-                case 1:
-                    n2 = "Poda";
-                    break;
-                case 2:
-                    n2 = "DyV";
-                    break;
-                case 3:
-                    n2 = "DyVPlus";
                     break;
             }
             //definir tallas y num de iteraciones
@@ -235,56 +173,56 @@ public class Opcion5 extends javax.swing.JFrame {
             //hacer busquedas
             for (int i = 0; i < T.length; i++) {
                 for (int j = 0; j < N; j++) {
-                    b[i][j].exhaustiva();
-                    b[i][j].poda();
-                    b[i][j].dyv();
-                    b[i][j].dyvplus();
+                    switch (a1) {
+                        case 0:
+                            b[i][j].exhaustiva();
+                            break;
+                        case 1:
+                            b[i][j].poda();
+                            break;
+                        case 2:
+                            b[i][j].dyv();
+                            break;
+                        case 3:
+                            b[i][j].dyvplus();
+                            break;
+                    }
                 }
             }
             //calcular medias
-            double[][] tablaT = new double[T.length][Busqueda.NUM];
-            int[][] tablaC = new int[T.length][Busqueda.NUM];
+            double[][] tablaT = new double[T.length][1];
+            int[][] tablaC = new int[T.length][1];
             for (int i = 0; i < T.length; i++) {
-                for (int j = 0; j < Busqueda.NUM; j++) {
-                    tablaT[i][j] = 0.0;
-                    tablaC[i][j] = 0;
-                }
+                tablaT[i][0] = 0.0;
+                tablaC[i][0] = 0;
             }
             for (int i = 0; i < T.length; i++) {
                 for (int j = 0; j < N; j++) {
-                    tablaT[i][0] = tablaT[i][0] + b[i][j].t[0];
-                    tablaT[i][1] = tablaT[i][1] + b[i][j].t[1];
-                    tablaT[i][2] = tablaT[i][2] + b[i][j].t[2];
-                    tablaT[i][3] = tablaT[i][3] + b[i][j].t[3];
-                    tablaC[i][0] = tablaC[i][0] + b[i][j].numcal[0];
-                    tablaC[i][1] = tablaC[i][1] + b[i][j].numcal[1];
-                    tablaC[i][2] = tablaC[i][2] + b[i][j].numcal[2];
-                    tablaC[i][3] = tablaC[i][3] + b[i][j].numcal[3];
+                    tablaT[i][0] = tablaT[i][0] + b[i][j].t[a1];
+                    tablaC[i][0] = tablaC[i][0] + b[i][j].numcal[a1];
                 }
             }
+            System.out.println(tablaT[0][0]);
             //definir formato de salida
             DecimalFormat tp = new DecimalFormat("0.0000");
             double nanoMedia = 1000000.0 * (double) (N);
             //rellenar tabla
             String[] atributos = {"Talla",
-                n1,
-                n2,
-                n1,
-                n2};
+                "Tiempo(ms)",
+                "Calculadas)"};
             Object[][] datos = {
-                {" ", "Tiempo(ms)", "Tiempo(ms)", "Calculadas)", "Calculadas"},
-                {T[0], tp.format(tablaT[0][a1] / nanoMedia), tp.format(tablaT[0][a2] / nanoMedia), tablaC[0][a1] / N, tablaC[0][a2] / N},
-                {T[1], tp.format(tablaT[1][a1] / nanoMedia), tp.format(tablaT[1][a2] / nanoMedia), tablaC[1][a1] / N, tablaC[1][a2] / N},
-                {T[2], tp.format(tablaT[2][a1] / nanoMedia), tp.format(tablaT[2][a2] / nanoMedia), tablaC[2][a1] / N, tablaC[2][a2] / N},
-                {T[3], tp.format(tablaT[3][a1] / nanoMedia), tp.format(tablaT[3][a2] / nanoMedia), tablaC[3][a1] / N, tablaC[3][a2] / N},
-                {T[4], tp.format(tablaT[4][a1] / nanoMedia), tp.format(tablaT[4][a2] / nanoMedia), tablaC[4][a1] / N, tablaC[4][a2] / N}
+                {T[0], tp.format(tablaT[0][0] / nanoMedia), tablaC[0][0] / N},
+                {T[1], tp.format(tablaT[1][0] / nanoMedia), tablaC[1][0] / N},
+                {T[2], tp.format(tablaT[2][0] / nanoMedia), tablaC[2][0] / N},
+                {T[3], tp.format(tablaT[3][0] / nanoMedia), tablaC[3][0] / N},
+                {T[4], tp.format(tablaT[4][0] / nanoMedia), tablaC[4][0] / N}
             };
             double[][] valores = {
-                {TD[0], tablaT[0][a1] / nanoMedia, tablaT[0][a2] / nanoMedia},
-                {TD[1], tablaT[1][a1] / nanoMedia, tablaT[1][a2] / nanoMedia},
-                {TD[2], tablaT[2][a1] / nanoMedia, tablaT[2][a2] / nanoMedia},
-                {TD[3], tablaT[3][a1] / nanoMedia, tablaT[3][a2] / nanoMedia},
-                {TD[4], tablaT[4][a1] / nanoMedia, tablaT[4][a2] / nanoMedia}
+                {TD[0], tablaT[0][0] / nanoMedia},
+                {TD[1], tablaT[1][0] / nanoMedia},
+                {TD[2], tablaT[2][0] / nanoMedia},
+                {TD[3], tablaT[3][0] / nanoMedia},
+                {TD[4], tablaT[4][0] / nanoMedia}
             };
             //mostrar tabla
             JTable t = new JTable(datos, atributos);
@@ -294,11 +232,11 @@ public class Opcion5 extends javax.swing.JFrame {
             f.add(sp);
             f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             f.setBounds(700, 200, 700, 150);
-            f.setTitle("Comparación - " + n1 + " vs " + n2);
+            f.setTitle("Análisis - " + n1);
             f.setVisible(true);
             this.setVisible(false);
             //mostrar g
-            Grafica5 g = new Grafica5(valores, n1, n2);
+            GraficaE g = new GraficaE(valores, n1);
             g.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             g.setBounds(200, 350, 800, 400);
             g.setTitle("Representación");
@@ -313,11 +251,15 @@ public class Opcion5 extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_bcancelActionPerformed
 
+    private void b03ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b03ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_b03ActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        new Opcion5().setVisible(true);
+        new OpcionE().setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -325,15 +267,10 @@ public class Opcion5 extends javax.swing.JFrame {
     private javax.swing.JRadioButton b01;
     private javax.swing.JRadioButton b02;
     private javax.swing.JRadioButton b03;
-    private javax.swing.JRadioButton b10;
-    private javax.swing.JRadioButton b11;
-    private javax.swing.JRadioButton b12;
-    private javax.swing.JRadioButton b13;
     private javax.swing.JButton bcancel;
     private javax.swing.JButton bok;
     private javax.swing.ButtonGroup grupo1;
     private javax.swing.ButtonGroup grupo2;
     private javax.swing.JLabel lab1;
-    private javax.swing.JLabel lab2;
     // End of variables declaration//GEN-END:variables
 }
