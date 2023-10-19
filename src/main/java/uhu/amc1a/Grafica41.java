@@ -15,15 +15,28 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class Grafica4 extends JFrame {
+public class Grafica41 extends JFrame {
 
     private final double[][] d;
 
-    public Grafica4(double[][] datos) {
+    public Grafica41(double[][] datos, boolean peor) {
         d = datos;
 
         //crear la grafica
         XYPlot plot = new XYPlot();
+
+        if (peor) {
+            //crear dmin0
+            XYDataset setDist0 = createDist(0, "Exh");
+            //caracteristicas de dmin0
+            XYItemRenderer renderer0 = new XYLineAndShapeRenderer(true, true);
+            renderer0.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
+            renderer0.setSeriesPaint(0, Color.CYAN);
+            renderer0.setSeriesStroke(0, new BasicStroke(2.0f));
+            //añadir dmin0 a la grafica
+            plot.setDataset(0, setDist0);
+            plot.setRenderer(0, renderer0);
+        }
 
         //crear dmin1
         XYDataset setDist1 = createDist(1, "Poda");

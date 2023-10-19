@@ -15,13 +15,13 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class GraficaExh extends JFrame {
+public class Grafica42 extends JFrame {
 
     private final double[][] d;
 
-    public GraficaExh(double[][] datos) {
+    public Grafica42(double[][] datos, boolean peor) {
         d = datos;
-        
+
         //crear la grafica
         XYPlot plot2 = new XYPlot();
 
@@ -35,6 +35,41 @@ public class GraficaExh extends JFrame {
         //añadir dmin0 a la grafica
         plot2.setDataset(0, setDist0);
         plot2.setRenderer(0, renderer0);
+
+        if (!peor) {
+            //crear dmin1
+            XYDataset setDist1 = createDist(1, "Poda");
+            //caracteristicas de dmin1
+            XYItemRenderer renderer1 = new XYLineAndShapeRenderer(true, true);
+            renderer1.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
+            renderer1.setSeriesPaint(0, Color.ORANGE);
+            renderer1.setSeriesStroke(0, new BasicStroke(2.0f));
+            //añadir dmin1 a la grafica
+            plot2.setDataset(1, setDist1);
+            plot2.setRenderer(1, renderer1);
+
+            //crear dmin2
+            XYDataset setDist2 = createDist(2, "DyV");
+            //caracteristicas de dmin2
+            XYItemRenderer renderer2 = new XYLineAndShapeRenderer(true, true);
+            renderer2.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
+            renderer2.setSeriesPaint(0, Color.GREEN);
+            renderer2.setSeriesStroke(0, new BasicStroke(2.0f));
+            //añadir dmin2 a la grafica
+            plot2.setDataset(2, setDist2);
+            plot2.setRenderer(2, renderer2);
+
+            //crear dmin3
+            XYDataset setDist3 = createDist(3, "DyVP");
+            //caracteristicas de dmin3
+            XYItemRenderer renderer3 = new XYLineAndShapeRenderer(true, true);
+            renderer3.setSeriesShape(0, new Rectangle2D.Double(-3.0, 0.0, 6.0, 6.0));
+            renderer3.setSeriesPaint(0, Color.YELLOW);
+            renderer3.setSeriesStroke(0, new BasicStroke(2.0f));
+            //añadir dmin3 a la grafica
+            plot2.setDataset(3, setDist3);
+            plot2.setRenderer(3, renderer3);
+        }
 
         //crear y añadir los ejes
         ValueAxis domain2 = new NumberAxis("Talla");
@@ -65,5 +100,3 @@ public class GraficaExh extends JFrame {
         return dataset;
     }
 }
-
-

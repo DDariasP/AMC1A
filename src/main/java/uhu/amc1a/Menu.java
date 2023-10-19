@@ -333,17 +333,19 @@ public class Menu extends javax.swing.JFrame {
             f.setTitle("Resultados");
             f.setVisible(true);
             //mostrar g
-            Grafica4 g = new Grafica4(valores);
+            Grafica41 g = new Grafica41(valores, peor);
             g.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             g.setBounds(200, 350, 800, 400);
             g.setTitle("Representación");
             g.setVisible(true);
-            //mostrar g2
-            GraficaExh g2 = new GraficaExh(valores);
-            g2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            g2.setBounds(1000, 350, 800, 400);
-            g2.setTitle("Representación");
-            g2.setVisible(true);
+            if (!peor) {
+                //mostrar g2
+                Grafica42 g2 = new Grafica42(valores, peor);
+                g2.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                g2.setBounds(1000, 350, 800, 400);
+                g2.setTitle("Representación");
+                g2.setVisible(true);
+            }
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
