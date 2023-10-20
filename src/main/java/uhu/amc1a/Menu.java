@@ -175,7 +175,7 @@ public class Menu extends javax.swing.JFrame {
                     "¿Tamaño del fichero?", "Crear un fichero .tsp aleatorio", JOptionPane.QUESTION_MESSAGE);
             if (input != null) {
                 talla = Integer.parseInt((String) input);
-                if (talla > 0) {
+                if (talla > 0 && talla <= 5000) {
                     array = Data.crearTSP(talla, peor);
                     labelArchivo.setText("Array cargado: " + fileName);
                 } else {

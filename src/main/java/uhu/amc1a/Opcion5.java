@@ -272,7 +272,7 @@ public class Opcion5 extends javax.swing.JFrame {
                 n1,
                 n2};
             Object[][] datos = {
-                {" ", "Tiempo(ms)", "Tiempo(ms)", "Calculadas)", "Calculadas"},
+                {" ", "Tiempo(ms)", "Tiempo(ms)", "Calculadas", "Calculadas"},
                 {T[0], tp.format(tablaT[0][a1] / nanoMedia), tp.format(tablaT[0][a2] / nanoMedia), tablaC[0][a1] / N, tablaC[0][a2] / N},
                 {T[1], tp.format(tablaT[1][a1] / nanoMedia), tp.format(tablaT[1][a2] / nanoMedia), tablaC[1][a1] / N, tablaC[1][a2] / N},
                 {T[2], tp.format(tablaT[2][a1] / nanoMedia), tp.format(tablaT[2][a2] / nanoMedia), tablaC[2][a1] / N, tablaC[2][a2] / N},
