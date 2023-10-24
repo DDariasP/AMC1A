@@ -101,16 +101,6 @@ public class Punto {
         return copia;
     }
 
-    public static double minY(Punto[] p) {
-        double min = p[0].y;
-        for (int i = 0; i < p.length; i++) {
-            if (min > p[i].y) {
-                min = p[i].y;
-            }
-        }
-        return min;
-    }
-
     @Override
     public String toString() {
         DecimalFormat p = new DecimalFormat("#.00");
