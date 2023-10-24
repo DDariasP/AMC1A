@@ -209,7 +209,7 @@ public class OpcionE extends javax.swing.JFrame {
             //rellenar tabla
             String[] atributos = {"Talla",
                 "Tiempo(ms)",
-                "Calculadas)"};
+                "Calculadas"};
             Object[][] datos = {
                 {T[0], tp.format(tablaT[0][0] / nanoMedia), tablaC[0][0] / N},
                 {T[1], tp.format(tablaT[1][0] / nanoMedia), tablaC[1][0] / N},
