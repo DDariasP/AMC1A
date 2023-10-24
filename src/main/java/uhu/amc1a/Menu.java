@@ -253,6 +253,7 @@ public class Menu extends javax.swing.JFrame {
             nube.setLocationRelativeTo(null);
             nube.setTitle("Representación - " + fileName);
             nube.setVisible(true);
+            setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
             JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
