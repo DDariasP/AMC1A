@@ -7,8 +7,12 @@ package uhu.amc1a;
 import java.awt.Cursor;
 import java.text.DecimalFormat;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import static uhu.amc1a.Menu.array;
+import static uhu.amc1a.Menu.fileName;
 
 /**
  *
@@ -38,7 +42,6 @@ public class OpcionE extends javax.swing.JFrame {
     private void initComponents() {
 
         grupo1 = new javax.swing.ButtonGroup();
-        grupo2 = new javax.swing.ButtonGroup();
         b01 = new javax.swing.JRadioButton();
         b00 = new javax.swing.JRadioButton();
         bok = new javax.swing.JButton();
@@ -141,110 +144,65 @@ public class OpcionE extends javax.swing.JFrame {
             if (b03.isSelected()) {
                 a1 = 3;
             }
-            //guardar eleccion
+            //guardar eleccion y hacer busqueda
             String n1 = "";
+            Busqueda b = new Busqueda(array);
             switch (a1) {
                 case 0:
                     n1 = "Exhaustiva";
+                    b.exhaustiva();
                     break;
                 case 1:
                     n1 = "Poda";
+                    b.poda();
                     break;
                 case 2:
                     n1 = "DyV";
+                    b.dyv();
                     break;
                 case 3:
                     n1 = "DyVPlus";
+                    b.dyvplus();
                     break;
             }
-            //definir tallas y num de iteraciones
-            int T[] = {200, 500, 1500, 3250, 5000};
-            double TD[] = {200.0, 500.0, 1500.0, 3250.0, 5000.0};
-            int N = 10;
-            Busqueda b[][] = new Busqueda[T.length][N];
-            //crear arrays
-            for (int i = 0; i < T.length; i++) {
-                for (int j = 0; j < N; j++) {
-                    Punto tmp[] = new Punto[T[i]];
-                    Punto.rellenar(tmp, T[i], Menu.peor);
-                    b[i][j] = new Busqueda(tmp);
-                }
-            }
-            //hacer busquedas
-            for (int i = 0; i < T.length; i++) {
-                for (int j = 0; j < N; j++) {
-                    switch (a1) {
-                        case 0:
-                            b[i][j].exhaustiva();
-                            break;
-                        case 1:
-                            b[i][j].poda();
-                            break;
-                        case 2:
-                            b[i][j].dyv();
-                            break;
-                        case 3:
-                            b[i][j].dyvplus();
-                            break;
-                    }
-                }
-            }
-            //calcular medias
-            double[][] tablaT = new double[T.length][1];
-            int[][] tablaC = new int[T.length][1];
-            for (int i = 0; i < T.length; i++) {
-                tablaT[i][0] = 0.0;
-                tablaC[i][0] = 0;
-            }
-            for (int i = 0; i < T.length; i++) {
-                for (int j = 0; j < N; j++) {
-                    tablaT[i][0] = tablaT[i][0] + b[i][j].t[a1];
-                    tablaC[i][0] = tablaC[i][0] + b[i][j].numcal[a1];
-                }
-            }
-            System.out.println(tablaT[0][0]);
-            //definir formato de salida
+            //crear archivo
+            Data.guardarBusqueda(b.array.get(a1), n1);
+            //definir formatos de salida
+            DecimalFormat d = new DecimalFormat("#.00000000");
             DecimalFormat tp = new DecimalFormat("0.0000");
-            double nanoMedia = 1000000.0 * (double) (N);
+            double nano = 1000000.0;
             //rellenar tabla
-            String[] atributos = {"Talla",
-                "Tiempo(ms)",
-                "Calculadas"};
+            String[] atributos = {"Estrategia",
+                "Punto1",
+                "Punto2",
+                "Distancia",
+                "Calculadas",
+                "Tiempo(ms)"};
             Object[][] datos = {
-                {T[0], tp.format(tablaT[0][0] / nanoMedia), tablaC[0][0] / N},
-                {T[1], tp.format(tablaT[1][0] / nanoMedia), tablaC[1][0] / N},
-                {T[2], tp.format(tablaT[2][0] / nanoMedia), tablaC[2][0] / N},
-                {T[3], tp.format(tablaT[3][0] / nanoMedia), tablaC[3][0] / N},
-                {T[4], tp.format(tablaT[4][0] / nanoMedia), tablaC[4][0] / N}
-            };
-            double[][] valores = {
-                {TD[0], tablaT[0][0] / nanoMedia},
-                {TD[1], tablaT[1][0] / nanoMedia},
-                {TD[2], tablaT[2][0] / nanoMedia},
-                {TD[3], tablaT[3][0] / nanoMedia},
-                {TD[4], tablaT[4][0] / nanoMedia}
+                {n1, b.min[a1].p1, b.min[a1].p2, d.format(b.min[a1].valor), b.numcal[a1], tp.format(b.t[a1] / nano)}
             };
             //mostrar tabla
             JTable t = new JTable(datos, atributos);
-            t.setEnabled(false);
             JScrollPane sp = new JScrollPane(t);
             JFrame f = new JFrame();
             f.add(sp);
             f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            f.setBounds(700, 200, 700, 150);
-            f.setTitle("Análisis - " + n1);
+            f.setBounds(700, 200, 1100, 75);
+            f.setTitle("Resultados - " + fileName);
             f.setVisible(true);
-            this.setVisible(false);
             //mostrar g
-            GraficaE g = new GraficaE(valores, n1);
-            g.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            g.setBounds(200, 350, 800, 400);
-            g.setTitle("Representación");
-            g.setVisible(true);
+            NubeE nube = new NubeE(array, b.min, a1);
+            nube.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            nube.setSize(800, 800);
+            nube.setLocationRelativeTo(null);
+            nube.setTitle("Representación - " + fileName);
+            nube.setVisible(true);
+            this.setVisible(false);
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         }
+
     }//GEN-LAST:event_bokActionPerformed
 
     private void bcancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bcancelActionPerformed
@@ -270,7 +228,6 @@ public class OpcionE extends javax.swing.JFrame {
     private javax.swing.JButton bcancel;
     private javax.swing.JButton bok;
     private javax.swing.ButtonGroup grupo1;
-    private javax.swing.ButtonGroup grupo2;
     private javax.swing.JLabel lab1;
     // End of variables declaration//GEN-END:variables
 }

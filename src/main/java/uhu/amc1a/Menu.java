@@ -199,7 +199,7 @@ public class Menu extends javax.swing.JFrame {
             if (input == JFileChooser.APPROVE_OPTION) {
                 file = fc.getSelectedFile();
                 fileName = file.getName();
-                array = Data.parsearTSP(file.getName());
+                array = Data.parsearTSP(file);
                 labelArchivo.setText("Array cargado: " + fileName);
             }
         } catch (Exception e) {
@@ -247,7 +247,7 @@ public class Menu extends javax.swing.JFrame {
             f.setTitle("Resultados - " + fileName);
             f.setVisible(true);
             //mostrar g
-            Nube nube = new Nube(array, b.min);
+            Nube3 nube = new Nube3(array, b.min);
             nube.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             nube.setSize(800, 800);
             nube.setLocationRelativeTo(null);
@@ -367,15 +367,20 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_botonOpcion5ActionPerformed
 
     private void botonOpcionEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOpcionEActionPerformed
-        try {
-            //abrir frame OpcionE
-            OpcionE f = new OpcionE();
-            f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            f.setBounds(700, 200, 225, 250);
-            f.setTitle("Elegir un algoritmo");
-            f.setVisible(true);
-        } catch (Exception e) {
-        }    }//GEN-LAST:event_botonOpcionEActionPerformed
+        if (array != null) {
+            try {
+                //abrir frame OpcionE
+                OpcionE f = new OpcionE();
+                f.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+                f.setBounds(700, 200, 225, 250);
+                f.setTitle("Elegir un algoritmo");
+                f.setVisible(true);
+            } catch (Exception e) {
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "No hay ningún array cargado.", "Aviso", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_botonOpcionEActionPerformed
 
     public static void main(String args[]) {
         Menu m = new Menu();

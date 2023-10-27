@@ -16,12 +16,12 @@ import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
-public class Nube extends JFrame {
+public class Nube3 extends JFrame {
 
     private final Punto[] p;
     private final Distancia[] d;
 
-    public Nube(Punto[] array, Distancia[] dmin) {
+    public Nube3(Punto[] array, Distancia[] dmin) {
         p = array;
         d = dmin;
 

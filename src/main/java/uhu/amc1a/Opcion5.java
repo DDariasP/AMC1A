@@ -296,13 +296,13 @@ public class Opcion5 extends javax.swing.JFrame {
             f.setBounds(700, 200, 700, 150);
             f.setTitle("Comparación - " + n1 + " vs " + n2);
             f.setVisible(true);
-            this.setVisible(false);
             //mostrar g
             Grafica5 g = new Grafica5(valores, n1, n2);
             g.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             g.setBounds(200, 350, 800, 400);
             g.setTitle("Representación");
             g.setVisible(true);
+            this.setVisible(false);
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         } catch (Exception e) {
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
